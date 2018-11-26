@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#FFFFFF"
+             tools:context=".NewFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout android:id="@+id/relativePrincipal" android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <ImageButton
+                android:id="@+id/titleImage"
+                android:background="@drawable/title"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+
+        <RelativeLayout
+                android:id="@+id/relative1"
+                android:layout_below="@id/titleImage"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/main_bk_element"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <TextView
+                        android:id="@+id/txtPerson"
+                        android:text="Borrow from"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:textColor="#00A6FF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:id="@+id/linear"
+                        android:layout_below="@id/txtPerson"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <Spinner
+                            android:id="@+id/spPerson"
+                            android:layout_width="280dp"
+                            android:layout_height="wrap_content"/>
+                    <Button
+                            android:id="@+id/btnAddPerson"
+                            android:background="@drawable/ic_add_circle_outline_black_24dp"
+                            android:backgroundTint="@color/azul"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"/>
+                    <Button
+                            android:id="@+id/btnDeletePerson"
+                            android:background="@drawable/ic_delete_black_24dp"
+                            android:backgroundTint="@color/azul"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"/>
+
+                </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/relative2"
+                android:layout_below="@id/relative1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/main_bk_element"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+            <TextView
+                    android:id="@+id/txtItem"
+                    android:text="Item"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/linear2"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/txtItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <Spinner
+                        android:id="@+id/spItem"
+                        android:longClickable="true"
+                        android:layout_width="280dp"
+                        android:layout_height="wrap_content"/>
+                <Button
+                        android:id="@+id/btnAddItem"
+                        android:background="@drawable/ic_add_circle_outline_black_24dp"
+                        android:backgroundTint="@color/azul"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"/>
+                <Button
+                        android:id="@+id/btnDeleteItem"
+                        android:background="@drawable/ic_delete_black_24dp"
+                        android:backgroundTint="@color/azul"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"/>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/linear1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/relative2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/txtBorrow"
+                        android:text="Borrow Date"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:clickable="true"
+                        android:textColor="#000000"
+                        android:id="@+id/edtBorrowDate"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/main_bk_element"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/linear3"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/linear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/txtReturn"
+                    android:text="Return Date"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:clickable="true"
+                    android:textColor="#000000"
+                    android:id="@+id/edtReturnDate"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/main_bk_element"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <Button
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linear3"
+                android:id="@+id/btnCreate"
+                android:text="Create"
+                android:textStyle="bold"
+                android:backgroundTint="@color/azul"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/main_bk_element"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

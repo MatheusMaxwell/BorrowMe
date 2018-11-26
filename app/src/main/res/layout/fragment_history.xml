@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@drawable/background"
+             tools:context=".HistoryFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/image"
+                android:background="@drawable/titlehistory"
+                android:layout_width="300dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="75dp"/>
+
+        <EditText
+                android:layout_below="@id/image"
+                android:id="@+id/edtSearch"
+                android:hint="Search"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColorHint="#FFFFFF"
+                android:backgroundTint="#036CA4"
+                android:background="@drawable/main_bk_element"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/list"
+                android:layout_below="@id/edtSearch"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/main_bk_element"
+                android:backgroundTint="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

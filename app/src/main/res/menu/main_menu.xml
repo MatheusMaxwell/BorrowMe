@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+            android:id="@+id/itemHistory"
+            android:title="History"
+            android:icon="@drawable/ic_history_black_24dp"
+    />
+
+    <item
+            android:id="@+id/itemNew"
+            android:title="New"
+            android:icon="@drawable/ic_add_circle_outline_black_24dp"
+    />
+
+
+
+</menu>
