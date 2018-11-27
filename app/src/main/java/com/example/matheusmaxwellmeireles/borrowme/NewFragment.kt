@@ -168,6 +168,7 @@ class NewFragment : Fragment() {
                             .setMessage("Are you sure you want to delete "+i.name+"?")
                             .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                                 MyApplication.database!!.PersonDAO().deletePerson(i)
+                                fillSpinnerPerson()
                                 return@OnClickListener
 
                             }).setNegativeButton(android.R.string.cancel) { dialog, which ->
@@ -203,6 +204,7 @@ class NewFragment : Fragment() {
                             .setMessage("Are you sure you want to delete "+i.nome+"?")
                             .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                                 MyApplication.database!!.ItemDAO().deleteItem(i)
+                                fillSpinnerItem()
                                 return@OnClickListener
 
                             }).setNegativeButton(android.R.string.cancel) { dialog, which ->
@@ -276,7 +278,6 @@ class NewFragment : Fragment() {
                         showMensagemAlert("Erro", "Blank name or CEP.")
                         return@OnClickListener
                     } else{
-
                         val persons = MyApplication.database!!.PersonDAO().getAllPerson()
                         var existe = false
                         for(i in persons){
@@ -289,8 +290,11 @@ class NewFragment : Fragment() {
                                 edtCepPerson.text.toString(), txtAddressPerson.text.toString()
                             )
                             MyApplication.database?.PersonDAO()?.insertPerson(person)
-                            Toast.makeText(context, "Saved", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_LONG).show()
                             fillSpinnerPerson()
+                            if(progressBar.visibility == View.VISIBLE){
+                                showMensagemAlert("Alert.","We couldn't fetch your address, we'll try later.")
+                            }
                         }
                         else{
                             showMensagemAlert("Erro", "A person with this name already exists!")
@@ -298,6 +302,7 @@ class NewFragment : Fragment() {
 
 
                     }
+
                 }).setNegativeButton(android.R.string.cancel) { dialog, which ->
                     dialog.dismiss()
                 }
@@ -466,6 +471,7 @@ class NewFragment : Fragment() {
                 var endereco = convertJSONTOObject(response)
                 if(endereco.logradouro.isNullOrEmpty()){
                     showMensagemAlert("Erro", "Invalid CEP")
+                    progressBar.visibility = View.INVISIBLE
                 }
                 else{
                     txtAddressPerson.text = endereco.logradouro + " "+endereco.localidade + "-" + endereco.uf
