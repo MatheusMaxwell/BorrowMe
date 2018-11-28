@@ -200,7 +200,7 @@ class NewFragment : Fragment() {
                 for (i in items){
                     if(i.idItem == idItemUse){
                         builder
-                            .setTitle("Delete Person")
+                            .setTitle("Delete Item")
                             .setMessage("Are you sure you want to delete "+i.nome+"?")
                             .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                                 MyApplication.database!!.ItemDAO().deleteItem(i)
@@ -445,6 +445,9 @@ class NewFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
             imageItem!!.setImageURI(image_uri)
+        }
+        else{
+            image_uri = null
         }
     }
 
