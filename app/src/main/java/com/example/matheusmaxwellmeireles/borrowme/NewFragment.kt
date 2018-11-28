@@ -10,6 +10,8 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.icu.util.DateInterval
@@ -370,14 +372,16 @@ class NewFragment : Fragment() {
                         if(!existe){
                             if(image_uri == null){
                                 //val resources = context!!.resources
-                                image_uri = Uri.parse("android.resource://"+context!!.getPackageName()+"/drawable/image_blank")
+                                image_uri = Uri.parse("android.resource://"+context!!.getPackageName()+"/drawable/ft")
                                 imageItem!!.setImageURI(image_uri)
+
                             }
 
                             val item = Entities.Item(edtNameItem.text.toString(), imageToBitmap(imageItem!!))
                             MyApplication.database!!.ItemDAO().insertItem(item)
                             Toast.makeText(context, "Saved", Toast.LENGTH_LONG).show()
                             fillSpinnerItem()
+                            imageItem!!.setImageURI(null)
                             image_uri = null
                             return@OnClickListener
                         }
@@ -504,7 +508,7 @@ class NewFragment : Fragment() {
     private fun imageToBitmap(image: ImageView): ByteArray {
         val bitmap = (image.drawable as BitmapDrawable).bitmap
         val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         return stream.toByteArray()
     }
 
