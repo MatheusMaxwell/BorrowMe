@@ -83,8 +83,6 @@ class NewFragment : Fragment() {
     var btnCreate: Button? = null
     var idPersonUse: Int? = -1
     var idItemUse: Int? = -1
-    var dateBorrowInverse: Int = 0
-    var dateReturnInverse: Int = 0
     var CHANNEL_ID: String = "channel_id_borrowme"
 
     override fun onAttach(context: Context?) {
@@ -227,7 +225,7 @@ class NewFragment : Fragment() {
                 //val dateBorrow = LocalDate.parse(edtBorrowDate!!.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                 showMensagemAlert("Erro", "Blank values.")
             }
-            else if (dateBorrowInverse-dateReturnInverse > 0){
+            else if (dateBorrowIsGreaterThanDateReturn(edtBorrowDate!!.text.toString(), edtReturnDate!!.text.toString())){
                 showMensagemAlert("Erro", "The date of return must be greater than the borrow date.")
             }
             else{
@@ -358,7 +356,7 @@ class NewFragment : Fragment() {
                 .setView(view2)
                 .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                     if (edtNameItem.text.toString().isNullOrEmpty()) {
-                        showMensagemAlert("Erro", "Insert name item!")
+                        showMensagemAlert("Erro", "Name is blank.")
                         return@OnClickListener
 
                     } else {
@@ -371,15 +369,17 @@ class NewFragment : Fragment() {
                         }
                         if(!existe){
                             if(image_uri == null){
-                                val resources = context!!.resources
+                                //val resources = context!!.resources
                                 image_uri = Uri.parse("android.resource://"+context!!.getPackageName()+"/drawable/image_blank")
                                 imageItem!!.setImageURI(image_uri)
                             }
 
                             val item = Entities.Item(edtNameItem.text.toString(), imageToBitmap(imageItem!!))
-                            MyApplication.database?.ItemDAO()?.insertItem(item)
+                            MyApplication.database!!.ItemDAO().insertItem(item)
                             Toast.makeText(context, "Saved", Toast.LENGTH_LONG).show()
                             fillSpinnerItem()
+                            image_uri = null
+                            return@OnClickListener
                         }
                         else{
                             showMensagemAlert("Erro", "A item with this name already exists!")
@@ -518,8 +518,6 @@ class NewFragment : Fragment() {
         val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
             var month1 = mMonth +1
             edtBorrowDate!!.setText(""+mDay+"/"+month1+"/"+mYear)
-            val str = "${mYear}${month1}${mDay}"
-            dateBorrowInverse = str.toInt()
             //Toast.makeText(context, "date: "+dateBorrowInverse,Toast.LENGTH_LONG).show()
         }, year, month, day)
         dpd.show()
@@ -534,8 +532,6 @@ class NewFragment : Fragment() {
         val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
             var month1 = mMonth +1
             edtReturnDate!!.setText(""+mDay+"/"+month1+"/"+mYear)
-            val str = "${mYear}${month1}${mDay}"
-            dateReturnInverse= str.toInt()
             //Toast.makeText(context, "date: "+dateReturnInverse,Toast.LENGTH_LONG).show()
         }, year, month, day)
         dpd.show()
@@ -554,12 +550,33 @@ class NewFragment : Fragment() {
             //System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.DAYS))
             //days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) as Int
             days = diff/86400000
-            Toast.makeText(context, "Dias: ${days}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "Dias: ${days}", Toast.LENGTH_LONG).show()
         } catch (e: ParseException) {
             e.printStackTrace()
         }
 
         return days
+    }
+
+    fun dateBorrowIsGreaterThanDateReturn(borrow: String, returnDate: String): Boolean{
+        val myFormat = SimpleDateFormat("dd/MM/yyyy")
+        var ret = false
+        //val inputString1 = "21/11/2018"
+        //val inputString2 = "01/01/2019"
+        try {
+            val date1 = myFormat.parse(borrow)
+            val date2 = myFormat.parse(returnDate)
+
+            if(date1.time > date2.time)
+                ret = true
+            else
+                ret = false
+            //Toast.makeText(context, "Dias: ${days}", Toast.LENGTH_LONG).show()
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+
+        return ret
     }
 
     fun showMensagemAlert(title: String, message: String){
