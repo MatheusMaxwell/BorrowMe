@@ -9,6 +9,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/main_bk_element"
             android:hint="Name"
+            android:maxLength="29"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"

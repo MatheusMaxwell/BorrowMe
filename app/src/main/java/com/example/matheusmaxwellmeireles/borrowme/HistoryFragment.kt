@@ -103,6 +103,7 @@ class HistoryFragment : Fragment() {
             val deleteItem = SwipeMenuItem(
                 context
             )
+
             // set item background
             deleteItem.background = ColorDrawable(
                 Color.rgb(
@@ -110,11 +111,16 @@ class HistoryFragment : Fragment() {
                     0x3F, 0x25
                 )
             )
+
             // set item width
-            deleteItem.width = 170
+            deleteItem.width = 200
+
+
             // set a icon
             deleteItem.setIcon(R.drawable.ic_delete_black_24dp)
+
             // add to menu
+
             menu.addMenuItem(deleteItem)
         }
 
@@ -123,6 +129,7 @@ class HistoryFragment : Fragment() {
         list!!.setOnMenuItemClickListener { position, menu, index ->
             when (index) {
                 0 -> deleteBorrow(position, listBorrows)
+
 
             }
             // false : close the menu; true : not close the menu
